@@ -3,44 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDET Training</title>
+    <title>Session Recordings</title>
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             display: flex;
         }
 
+        /* Sidebar Styling */
         .sidebar {
             width: 200px;
-            background-color: #007BFF;
-            color: white;
-            height: 100vh;
+            background-color: #333333; /* Professional dark gray background */
+            color: #F0F0F0; /* Light gray text for readability */
+            height: 100vh; /* Full viewport height */
             padding: 20px;
+            position: fixed; /* Static sidebar */
+            left: 0; /* Aligns to the left */
+            top: 0; /* Aligns to the top */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15); /* Subtle shadow for definition */
         }
 
         .sidebar h2 {
             font-size: 1.5em;
             margin-bottom: 20px;
+            color: #4F9D9D; /* Cool grayish teal for the title */
+            text-align: center;
         }
 
         .category {
             cursor: pointer;
             padding: 10px;
             margin-bottom: 10px;
-            background-color: #0056b3;
+            background-color: #4F4F4F; /* Mid-gray for category blocks */
             border-radius: 5px;
             text-align: center;
+            color: #F0F0F0; /* Light text color */
+            transition: background-color 0.3s ease-in-out;
         }
 
         .category:hover {
-            background-color: #003f8c;
+            background-color: #5C5C5C; /* Slightly lighter gray for hover state */
         }
 
+        .category.selected {
+            background-color: #3CB4AC; /* Blue-green highlight for selected option */
+            color: #FFFFFF; /* White text for better contrast */
+            font-weight: bold; /* Optional: Make the text bold for emphasis */
+        }
+
+        /* Main Content Styling */
         .main-content {
             flex-grow: 1;
             padding: 20px;
             background-color: #f9f9f9;
+            margin-left: 200px; /* Leaves space for the fixed sidebar */
         }
 
         .session {
@@ -54,7 +72,8 @@
 
         .title {
             font-size: 1.2em;
-            color: #007BFF;
+            color: #4F9D9D; /* Cool grayish teal for session titles */
+            font-weight: bold; /* Bold titles for emphasis */
         }
 
         .description {
@@ -63,75 +82,98 @@
         }
 
         .link {
-            color: #007BFF;
+            color: #3CB4AC; /* Vibrant blue-green for links */
             text-decoration: none;
+            font-weight: bold; /* Slightly more prominent */
+            transition: color 0.3s ease-in-out;
         }
 
         .link:hover {
+            color: #2A8B83; /* Slightly darker blue-green for hover state */
             text-decoration: underline;
+        }
+
+        .password {
+            font-size: 0.8em; /* Smaller text size */
+            color: #555; /* Subtle gray */
+            margin-top: 5px; /* Adds spacing below the link */
         }
     </style>
 </head>
 <body>
-<div class="sidebar">
-    <h2>Sections</h2>
-    <div class="category" onclick="showCategory('coreJava')">Core Java</div>
-    <div class="category" onclick="showCategory('selenium')">Selenium</div>
-</div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Categories</h2>
+        <div class="category" onclick="showCategory('coreJava')">Core Java</div>
+        <div class="category" onclick="showCategory('selenium')">Selenium</div>
+    </div>
 
-<div class="main-content" id="content">
-    <h1>SDET Training</h1>
-    <p>Select a section to view recordings.</p>
-</div>
+    <!-- Main Content -->
+    <div class="main-content" id="content">
+        <h1>Session Recordings</h1>
+        <p>Select a category to view recordings.</p>
+    </div>
 
-<script>
-    const recordings = {
-        coreJava: [
-            {
-                title: "Session 1: Introduction to Core Java",
-                description: "Learn the basics of Java programming, including syntax and concepts.",
-                url: "https://example.com/corejava1",
-                password: "java123"
-            },
-            {
-                title: "Session 2: Object-Oriented Programming in Java",
-                description: "Explore the principles of OOP with Java examples.",
-                url: "https://example.com/corejava2",
-                password: "oop456"
-            }
-        ],
-        selenium: [
-            {
-                title: "Session 1: Introduction to Selenium",
-                description: "Understand the basics of Selenium for automated testing.",
-                url: "https://example.com/selenium1",
-                password: "selenium789"
-            },
-            {
-                title: "Session 2: Selenium WebDriver",
-                description: "Deep dive into Selenium WebDriver and its capabilities.",
-                url: "https://example.com/selenium2",
-                password: "webdriver101"
-            }
-        ]
-    };
+    <!-- JavaScript -->
+    <script>
+        const recordings = {
+            coreJava: [
+                {
+                    title: "Session 1: Introduction to Core Java",
+                    description: "Learn the basics of Java programming, including syntax and concepts.",
+                    url: "https://example.com/corejava1",
+                    password: "java123"
+                },
+                {
+                    title: "Session 2: Object-Oriented Programming in Java",
+                    description: "Explore the principles of OOP with Java examples.",
+                    url: "https://example.com/corejava2",
+                    password: "oop456"
+                }
+            ],
+            selenium: [
+                {
+                    title: "Session 1: Introduction to Selenium",
+                    description: "Understand the basics of Selenium for automated testing.",
+                    url: "https://example.com/selenium1",
+                    password: "selenium789"
+                },
+                {
+                    title: "Session 2: Selenium WebDriver",
+                    description: "Deep dive into Selenium WebDriver and its capabilities.",
+                    url: "https://example.com/selenium2",
+                    password: "webdriver101"
+                }
+            ]
+        };
 
-    function showCategory(category) {
-        const contentDiv = document.getElementById('content');
-        contentDiv.innerHTML = `<h1>${category.charAt(0).toUpperCase() + category.slice(1)} Recordings</h1>`;
-        recordings[category].forEach(recording => {
-            contentDiv.innerHTML += `
-                <div class="session">
-                    <div class="title">${recording.title}</div>
-                    <div class="description">${recording.description}</div>
-                    <a class="link" href="${recording.url}" target="_blank">Watch Recording</a>
-                    <div class="password" style="font-size: 0.8em; color: #555; margin-top: 5px;">
-                        Password: ${recording.password}
+        function showCategory(category) {
+            // Get all category elements
+            const categories = document.querySelectorAll('.category');
+            
+            // Remove the "selected" class from all category elements
+            categories.forEach(cat => cat.classList.remove('selected'));
+            
+            // Add the "selected" class to the clicked category
+            const selectedCategory = document.querySelector(`[onclick="showCategory('${category}')"]`);
+            selectedCategory.classList.add('selected');
+            
+            // Update the main content
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `<h1>${category.charAt(0).toUpperCase() + category.slice(1)} Recordings</h1>`;
+            recordings[category].forEach(recording => {
+                contentDiv.innerHTML += `
+                    <div class="session">
+                        <div class="title">${recording.title}</div>
+                        <div class="description">${recording.description}</div>
+                        <a class="link" href="${recording.url}" target="_blank">Watch Recording</a>
+                        <div class="password">
+                            Password: ${recording.password}
+                        </div>
                     </div>
-                </div>
-            `;
-        });
-    }
-</script>
+                `;
+            });
+        }
+    </script>
 </body>
 </html>
