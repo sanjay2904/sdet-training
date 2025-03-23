@@ -90,24 +90,28 @@
             {
                 title: "Session 1: Introduction to Core Java",
                 description: "Learn the basics of Java programming, including syntax and concepts.",
-                url: "https://example.com/corejava1"
+                url: "https://example.com/corejava1",
+                password: "java123"
             },
             {
                 title: "Session 2: Object-Oriented Programming in Java",
                 description: "Explore the principles of OOP with Java examples.",
-                url: "https://example.com/corejava2"
+                url: "https://example.com/corejava2",
+                password: "oop456"
             }
         ],
         selenium: [
             {
                 title: "Session 1: Introduction to Selenium",
                 description: "Understand the basics of Selenium for automated testing.",
-                url: "https://example.com/selenium1"
+                url: "https://example.com/selenium1",
+                password: "selenium789"
             },
             {
                 title: "Session 2: Selenium WebDriver",
                 description: "Deep dive into Selenium WebDriver and its capabilities.",
-                url: "https://example.com/selenium2"
+                url: "https://example.com/selenium2",
+                password: "webdriver101"
             }
         ]
     };
@@ -121,6 +125,9 @@
                     <div class="title">${recording.title}</div>
                     <div class="description">${recording.description}</div>
                     <a class="link" href="${recording.url}" target="_blank">Watch Recording</a>
+                    <div class="password" style="font-size: 0.8em; color: #555; margin-top: 5px;">
+                        Password: ${recording.password}
+                    </div>
                 </div>
             `;
         });
