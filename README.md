@@ -1,1 +1,0 @@
-# sdet-training.github.io
